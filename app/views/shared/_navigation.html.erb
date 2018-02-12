@@ -3,5 +3,13 @@
     <ul class="navbar-list">
       <%= nav_item('Home', root_path) %>
     </ul>
+    <ul class="navbar-list u-pull-right">
+      <% if user_signed_in? %>
+          <%= nav_item('Logout', destroy_user_session_path, method: :delete) %>
+      <% else %>
+          <%= nav_item('Sign In', new_user_session_path) %>
+          <%= nav_item('Sign Up', new_user_registration_path) %>
+      <% end %>
+    </ul>
   </div>
 </nav>

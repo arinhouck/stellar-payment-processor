@@ -1,4 +1,6 @@
-
+body {
+  background: #f3f3f3;
+}
 .navbar {
   display: none; }
 
@@ -116,4 +118,45 @@
   .popover-link:hover,
   .popover-item:first-child .popover-link:hover:after {
     border-bottom-color: #33C3F0; }
+}
+
+.flex-grid {
+  margin: 20px 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.col {
+  flex: 1;
+}
+.card {
+  background: #fff;
+  border-radius: 5px;
+  min-width: 225px;
+  margin: 20px 12px;
+
+  .card-content {
+    padding: 10px;
+    min-height: 175px;
+  }
+
+  .button.memo {
+    color: #555;
+  }
+
+  .card-footer {
+    .button {
+      border-radius: 0 0 5px 5px;
+      margin: 0;
+    }
+  }
+
+  box-shadow: 0 14px 28px rgba(0,0,0,0.08), 0 10px 10px rgba(0,0,0,0.05);
+  h6 {
+    letter-spacing: 2px;
+  }
+  code {
+    font-size: 75%;
+    margin-bottom: 5px;
+  }
 }

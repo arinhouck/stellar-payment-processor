@@ -1,0 +1,38 @@
+<% purchase = @purchases.find { |p| p.content_id == content.id } %>
+<div class="col card">
+  <div class="card-content">
+    <h6><%= content.title %></h6>
+    <p>
+      <%= content.description %>
+    </p>
+    <% if purchase.present? && !purchase.completed %>
+      <code id="memo_<%= content.id %>"><%= purchase.id %></code>
+    <% end %>
+  </div>
+  <div class="card-footer">
+    <% if !purchase.present? %>
+        <%= link_to 'Purchase', purchases_path(purchase: { content_id: content.id }), class: 'button button-primary u-full-width', method: :post %>
+    <% elsif purchase.completed %>
+        <%= button_tag 'Purchased', class: 'button u-full-width', disabled: true %>
+    <% else %>
+        <%= button_tag 'Copy Memo', class: 'button memo button-primary u-full-width', data: { target: "memo_#{content.id}" } %>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $('.memo').on('click', function() {
+      var element = $(this);
+      var target = element.data('target');
+      // Copy
+      var range = document.createRange();
+      range.selectNode(document.getElementById(target));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+
+      element.text('Copied!');
+      window.setTimeout(function() {
+          element.text('Copy Memo');
+      }, 2500)
+  })
+</script>
