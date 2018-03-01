@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212041355) do
+ActiveRecord::Schema.define(version: 20180227035529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pgcrypto"
 
   create_table "contents", force: :cascade do |t|
     t.string "title"
@@ -23,14 +22,23 @@ ActiveRecord::Schema.define(version: 20180212041355) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "purchases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "purchases", force: :cascade do |t|
     t.boolean "completed", default: false, null: false
+    t.string "memo", null: false
     t.bigint "user_id"
     t.bigint "content_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_purchases_on_content_id"
+    t.index ["memo"], name: "index_purchases_on_memo"
     t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

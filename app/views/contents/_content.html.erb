@@ -6,7 +6,7 @@
       <%= content.description %>
     </p>
     <% if purchase.present? && !purchase.completed %>
-      <code id="memo_<%= content.id %>"><%= purchase.id %></code>
+      <code id="memo_<%= content.id %>"><%= purchase.memo %></code>
     <% end %>
   </div>
   <div class="card-footer">
